@@ -20,18 +20,16 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Env
-        run: set
+        run: |
+          gci env:* | sort-object name
 
       - name: Set up Visual C Build Tools Workload for Visual Studio 2017 Build Tools
-        run: hoco install visualstudio2017-workload-vctools
+        run: choco install visualstudio2017-workload-vctools
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         if: failure()
         with:
           path: |
-            target/*.zip
-            target/reports/**
-            target/test-classes/native-image-configs/**/*.json
-            target/surefire-reports/**
-            target/failsafe-reports/**
+            C:\ProgramData\chocolatey\logs
+            C:\Users\runneradmin\AppData\Local\Temp\chocolatey\dd_*.log
